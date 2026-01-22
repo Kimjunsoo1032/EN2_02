@@ -13,16 +13,16 @@ public class Health : MonoBehaviour
         currentHealth_ = maxHealth_;
         collider_ = GetComponent<Collider>();
     }
-    public void Damage(float point)
+    public virtual void Damage(float point)
     {
         currentHealth_ -= point;
         if (currentHealth_ > 0)
         {
-            return;
+            Death();
         }
         Death();
     }
-    private void Death()
+    protected virtual void Death()
     {
         Destroy(gameObject);
     }

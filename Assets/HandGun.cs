@@ -27,7 +27,7 @@ public class HandGun : GunBase
         if (Physics.Raycast(camRay, out RaycastHit hit, rayLength_, layerMask))
         {
             targetPoint = hit.point;
-
+            Debug.Log(hit.transform.gameObject.name);
             if (hit.collider.TryGetComponent(out Health health))
             {
                 health.Damage(power_);

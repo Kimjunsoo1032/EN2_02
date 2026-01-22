@@ -26,7 +26,9 @@ public class RayBullet : MonoBehaviour
         endPosition_ = endPosition;
 
         line_.SetPosition(0, beginPosition_);
+        endPosition_=new Vector3(endPosition_.x, endPosition_.y+1.5f, endPosition_.z);
         line_.SetPosition(1, endPosition_);
+        Debug.Log(endPosition_);
     }
 
     private void Update()

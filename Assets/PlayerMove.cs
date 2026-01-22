@@ -101,6 +101,7 @@ public class PlayerMove : MonoBehaviour
         GunBase gun;
 
         if (!item.TryGetComponent(out gun)) { return; }
+
         if (!gun.GetIsAlone()) { return; }
 
         arm_.Grab(gun);

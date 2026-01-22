@@ -45,9 +45,11 @@ public class Arm : MonoBehaviour
         bool isFindCursor =
             cameraObject.TryGetComponent(out cursor_);
         Assert.IsTrue(isFindCursor);
+        CheckGrabGun();
     }
     private void Update()
     {
+        if (!OwnerIsPlayer()) { return; }
         Vector3 cursorPoint =
             cursor_.GetRaycastHit().point;
 
@@ -55,6 +57,23 @@ public class Arm : MonoBehaviour
             transform.position.y - cursorPoint.y;
 
         transform.LookAt(cursorPoint);
+    }
+    private void CheckGrabGun()
+    {
+        Assert.IsTrue(
+            transform.childCount <= 1,
+            "一つの腕に複数の銃が割り当てられています。"
+    );
+        if (transform.childCount == 0) { return; }
+        GunBase grabGun;
+        bool hasGun =
+            transform.GetChild(0).TryGetComponent(out grabGun);
+        if (hasGun) { Grab(grabGun); }
+    }
+    private bool OwnerIsPlayer()
+    {
+        if (transform.parent == null) { return false; }
+        return transform.parent.tag == "Player";
     }
 
 }
